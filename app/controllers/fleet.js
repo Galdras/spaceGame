@@ -1,11 +1,11 @@
 var mongoose    = require('mongoose');
 
-var Planet   = require('../models/planets'); // get our mongoose model
+var Fleet   = require('../models/fleet'); // get our mongoose model
 
-// Function Promise for search/update/create systems
-var findPromiseByName = function(name) {
+// Function Promise for search/update/create fleet
+var findPromiseByOwner = function(owner) {
 		var p = new Promise(function(resolve,reject) {
-		  Planet.findOne({'name' : name}, function(err,user) {
+		  Fleet.findOne({'owner' : owner}, function(err,user) {
 		    if(err) reject(err);
 		    resolve(user);
 		  });
@@ -15,7 +15,7 @@ var findPromiseByName = function(name) {
 
 var updatePromise = function(id,update) {
 	var p = new Promise(function(resolve,reject) {
-		Planet.update({ _id: id }, { $set: update}, function(err,user){
+		Fleet.update({ _id: id }, { $set: update}, function(err,user){
 			 if (err) reject(err);
 		    resolve(user);
 		});
@@ -23,11 +23,11 @@ var updatePromise = function(id,update) {
 	return p;
 };
 
-var addPromise = function(newplanet) {
+var addPromise = function(newfleet) {
 	var p = new Promise(function(resolve,reject) {
-			  newplanet.save(function(err) {
+			  newfleet.save(function(err) {
 			    if (err) reject(err);
-			    console.log('Planet saved successfully');
+			    console.log('Fleet saved successfully');
 			    resolve({ success: true }) ;
 		});
 	});
@@ -36,17 +36,17 @@ var addPromise = function(newplanet) {
 
 module.exports = {
 
-	findPromiseByName : findPromiseByName,
+	findPromiseByOwner : findPromiseByOwner,
 
 	//Request by client
 	find : function(req, res) {
-	  Planet.find({}, function(err, systems) {
+	  Fleet.find({}, function(err, systems) {
 	    res.json(systems);
 	  });
 	},
 
-	findByName : function(req, res) {
-		findPromiseByName(req.params.name)
+	findByOwner : function(req, res) {
+		findPromiseByOwner(req.params.owner)
 		.then(function(user) {
 			res.json(user);
 		})

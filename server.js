@@ -11,6 +11,7 @@ var config = require('./app/config/config'); // get our config file
 var usersCtrl = require('./app/controllers/users');
 var systemsCtrl = require('./app/controllers/systems');
 var planetsCtrl = require('./app/controllers/planets');
+var fleetCtrl = require('./app/controllers/fleet');
 var setupCtrl = require('./app/controllers/setup');
 var authenticateCtrl = require('./app/controllers/authenticate');
     
@@ -63,6 +64,9 @@ apiRoutes.get('/systems/:name', systemsCtrl.findByName);
 
 apiRoutes.get('/planets', planetsCtrl.find); 
 apiRoutes.get('/planets/:name', planetsCtrl.findByName);
+
+apiRoutes.get('/fleet',fleetCtrl.find); 
+apiRoutes.get('/fleet/:owner', fleetCtrl.findByOwner);
 
 
 // apply the routes to our application with the prefix /api
