@@ -9,6 +9,7 @@ var mongoose    = require('mongoose');
 
 var config = require('./app/config/config'); // get our config file
 var usersCtrl = require('./app/controllers/users');
+var systemsCtrl = require('./app/controllers/systems');
 var setupCtrl = require('./app/controllers/setup');
 var authenticateCtrl = require('./app/controllers/authenticate');
     
@@ -55,6 +56,9 @@ apiRoutes.get('/', function(req, res) {
 // route to return all users (GET http://localhost:8080/api/users)
 apiRoutes.get('/users', usersCtrl.find); 
 apiRoutes.get('/users/:name', usersCtrl.findByName);
+
+apiRoutes.get('/systems', systemsCtrl.find); 
+apiRoutes.get('/systems/:name', systemsCtrl.findByName);
 
 
 // apply the routes to our application with the prefix /api
