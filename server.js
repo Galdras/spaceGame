@@ -12,6 +12,7 @@ var usersCtrl = require('./app/controllers/users');
 var systemsCtrl = require('./app/controllers/systems');
 var planetsCtrl = require('./app/controllers/planets');
 var fleetCtrl = require('./app/controllers/fleet');
+var allianceCtrl = require('./app/controllers/alliances');
 var setupCtrl = require('./app/controllers/setup');
 var authenticateCtrl = require('./app/controllers/authenticate');
     
@@ -67,6 +68,9 @@ apiRoutes.get('/planets/:name', planetsCtrl.findByName);
 
 apiRoutes.get('/fleet',fleetCtrl.find); 
 apiRoutes.get('/fleet/:owner', fleetCtrl.findByOwner);
+
+apiRoutes.put('/alliance',allianceCtrl.add);
+apiRoutes.post('/alliance/add',allianceCtrl.addUser);
 
 
 // apply the routes to our application with the prefix /api
